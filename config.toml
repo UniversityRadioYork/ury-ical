@@ -1,0 +1,44 @@
+#	 __  .___  ___. .______     ______   .______   .__________.    ___      .__   __. .__________.
+#	|  | |   \/   | |   _  \   /  __  \  |   _  \  |          |   /   \     |  \ |  | |          |
+#	|  | |  \  /  | |  |_)  | |  |  |  | |  |_)  | `---|  |---`  /  ^  \    |   \|  | `---|  |---`
+#	|  | |  |\/|  | |   ___/  |  |  |  | |      /      |  |     /  /_\  \   |  . `  |     |  |
+#	|  | |  |  |  | |  |      |  `--'  | |  |\  \_     |  |    /  _____  \  |  |\   |     |  |
+#	|__| |__|  |__| | _|       \______/  | _| `.__|    |__|   /__/     \__\ |__| \__|     |__|
+#
+#
+# This is the main config file for ury-ical.
+# Api Key should not be stored in this file. It should be in `.myradio.key`
+# Any changes to this config should be reflected in the struct `structs.Config`
+
+shortName	= "URY"
+longName	= "University Radio York"
+url			= "https://ury.org.uk"
+mixcloudUrl	= "https://mixcloud.com"
+
+# This is the config for the server
+[server]
+	address	= "localhost"
+	port 	= 3000
+	timeout	= 0
+
+# This is the default config for the VCalendar
+[calendar]
+	PRODID			= "-//University Radio York//URY Schedule//EN"
+	URL				= "https:/ury.org.uk/"
+	NAME			= "URY Schedule"
+	X_WR_CALNAME	= "URY Schedule"
+	DESCRIPTION		= """*** Warning - This feature is currently proof of concept. Information is not guaranteed to be correct. ***
+
+University Radio York (URY) is the student radio station for the University of York, broadcasting 24 hours a day during term time on 1350AM across the University's Heslington Campus and worldwide via ury.org.uk."""
+	X_WR_CALDESC		= """*** Warning - This feature is currently proof of concept. Information is not guaranteed to
+	 be correct.
+	 ***
+
+University Radio York (URY) is the student radio station for the University of York, broadcasting 24 hours a day during term time on 1350AM across the University's Heslington Campus and worldwide via ury.org.uk."""
+	TIMEZONE_ID			= "Europe/London"
+	X_WR_TIMEZONE		= "Europe/London"
+	REFRESH_INTERVAL	= "PT12H"
+	X_PUBLISHED_TTL		= "PT12H"
+	METHOD				= "PUBLIC"
+	VERSION				= "2.0"
+	CALSCALE			= "GREGORIAN"
