@@ -17,7 +17,6 @@ func NewIndexModel(s *myradio.Session) *IndexModel {
 
 // Get gets the data required for the Index controller from MyRadio.
 //
-// On success, it returns the current and next show, and nil.
 // Otherwise, it returns undefined data and the error causing failure.
 func (m *IndexModel) Get() ([]myradio.Timeslot, error) {
 	seasons, err := m.session.GetAllSeasonsInLatestTerm()

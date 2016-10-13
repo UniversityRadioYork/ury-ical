@@ -2,32 +2,39 @@ package controllers
 
 import (
 	"bytes"
+	"fmt"
 	"github.com/UniversityRadioYork/myradio-go"
 	"github.com/UniversityRadioYork/ury-ical/models"
 	"github.com/UniversityRadioYork/ury-ical/structs"
+	"github.com/gorilla/mux"
 	"github.com/jaytaylor/html2text"
 	"net/http"
+	"strconv"
 	"strings"
 	"text/template"
 )
 
-// IndexController is the controller for the index page.
-type IndexController struct {
+// ShowController is the controller for the index page.
+type ShowController struct {
 	Controller
 }
 
-// NewIndexController returns a new IndexController with the MyRadio session s
+// NewShowController returns a new ShowController with the MyRadio session s
 // and configuration context c.
-func NewIndexController(s *myradio.Session, c *structs.Config) *IndexController {
-	return &IndexController{Controller{session: s, config: c}}
+func NewShowController(s *myradio.Session, c *structs.Config) *ShowController {
+	return &ShowController{Controller{session: s, config: c}}
 }
 
 // Get handles the HTTP GET request r for the index page, writing to w.
-func (ic *IndexController) Get(w http.ResponseWriter, r *http.Request) {
+func (ic *ShowController) Get(w http.ResponseWriter, r *http.Request) {
 
-	im := models.NewIndexModel(ic.session)
+	im := models.NewShowModel(ic.session)
 
-	timeslots, err := im.Get()
+	vars := mux.Vars(r)
+
+	id, _ := strconv.Atoi(vars["id"])
+
+	show, timeslots, err := im.Get(id)
 
 	if err != nil {
 		http.Error(w, err.Error(), 500)
@@ -35,6 +42,8 @@ func (ic *IndexController) Get(w http.ResponseWriter, r *http.Request) {
 	}
 
 	cal := ic.config.Calendar
+
+	cal.NAME = fmt.Sprintf("%s - %s", cal.NAME, show.Title)
 
 	t := template.New("calendar template")
 	t.Funcs(template.FuncMap{
@@ -46,8 +55,9 @@ func (ic *IndexController) Get(w http.ResponseWriter, r *http.Request) {
 	var desc bytes.Buffer
 
 	data := structs.CalendarTemplateData{
+		Show:    show,
+		HasShow: true,
 		Config:  *ic.config,
-		HasShow: false,
 	}
 
 	err = t.Execute(&desc, data)

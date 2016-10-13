@@ -33,6 +33,9 @@ func NewServer(c *structs.Config) (*Server, error) {
 	ic := controllers.NewIndexController(session, c)
 	getRouter.HandleFunc("/ury.ics", ic.Get)
 
+	sc := controllers.NewShowController(session, c)
+	getRouter.HandleFunc("/show/{id:[0-9]+}.ics", sc.Get)
+
 	// End routes
 
 	s.UseHandler(router)

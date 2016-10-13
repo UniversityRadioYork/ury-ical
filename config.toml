@@ -23,6 +23,20 @@ Credits: {{.Timeslot.CreditsString}}
 
 {{.Config.Url}}{{.Timeslot.MicroSiteLink.URL}}"""
 
+calendarDescription = """*** Warning - This feature is currently proof of concept. Information is not guaranteed to be correct. ***
+
+{{if .HasShow}}
+
+{{ trim (html2text .Show.Description) }}
+
+Credits: {{.Show.CreditsString}}
+
+{{.Config.Url}}{{.Show.MicroSiteLink.URL}}
+
+{{end}}
+
+University Radio York (URY) is the student radio station for the University of York, broadcasting 24 hours a day during term time on 1350AM across the University's Heslington Campus and worldwide via ury.org.uk."""
+
 # This is the config for the server
 [server]
 	address	= "localhost"
@@ -35,18 +49,10 @@ Credits: {{.Timeslot.CreditsString}}
 	URL				= "https:/ury.org.uk/"
 	NAME			= "URY Schedule"
 	X_WR_CALNAME	= "URY Schedule"
-	DESCRIPTION		= """*** Warning - This feature is currently proof of concept. Information is not guaranteed to be correct. ***
-
-University Radio York (URY) is the student radio station for the University of York, broadcasting 24 hours a day during term time on 1350AM across the University's Heslington Campus and worldwide via ury.org.uk."""
-	X_WR_CALDESC		= """*** Warning - This feature is currently proof of concept. Information is not guaranteed to
-	 be correct.
-	 ***
-
-University Radio York (URY) is the student radio station for the University of York, broadcasting 24 hours a day during term time on 1350AM across the University's Heslington Campus and worldwide via ury.org.uk."""
-	TIMEZONE_ID			= "Europe/London"
-	X_WR_TIMEZONE		= "Europe/London"
+	TIMEZONE_ID		= "Europe/London"
+	X_WR_TIMEZONE	= "Europe/London"
 	REFRESH_INTERVAL	= "PT12H"
 	X_PUBLISHED_TTL		= "PT12H"
-	METHOD				= "PUBLIC"
-	VERSION				= "2.0"
-	CALSCALE			= "GREGORIAN"
+	METHOD		= "PUBLIC"
+	VERSION		= "2.0"
+	CALSCALE	= "GREGORIAN"

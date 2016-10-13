@@ -13,6 +13,7 @@ type Config struct {
 	Url                 string         `toml:"url"`
 	MixcloudUrl         string         `toml:"mixcloudUrl"`
 	TimeslotDescription string         `toml:"timeslotDescription"`
+	CalendarDescription string         `toml:"calendarDescription"`
 }
 
 // Server is a structure containing server configuration.
