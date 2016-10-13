@@ -6,12 +6,13 @@ import "github.com/UniversityRadioYork/ury-ical/utils/ical"
 //
 // See the comments for Server and PageContext for more details.
 type Config struct {
-	Server      Server         `toml:"server"`
-	Calendar    ical.VCalendar `toml:"calendar"`
-	ShortName   string         `toml:"shortName"`
-	LongName    string         `toml:"longName"`
-	Url         string         `toml:"url"`
-	MixcloudUrl string         `toml:"mixcloudUrl"`
+	Server              Server         `toml:"server"`
+	Calendar            ical.VCalendar `toml:"calendar"`
+	ShortName           string         `toml:"shortName"`
+	LongName            string         `toml:"longName"`
+	Url                 string         `toml:"url"`
+	MixcloudUrl         string         `toml:"mixcloudUrl"`
+	TimeslotDescription string         `toml:"timeslotDescription"`
 }
 
 // Server is a structure containing server configuration.

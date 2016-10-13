@@ -15,6 +15,14 @@ longName	= "University Radio York"
 url			= "https://ury.org.uk"
 mixcloudUrl	= "https://mixcloud.com"
 
+timeslotDescription = """Season {{.Timeslot.SeasonNum}}, Episode {{.Timeslot.TimeslotNum}}
+
+{{ trim (html2text .Timeslot.Description) }}
+
+Credits: {{.Timeslot.CreditsString}}
+
+{{.Config.Url}}{{.Timeslot.MicroSiteLink.URL}}"""
+
 # This is the config for the server
 [server]
 	address	= "localhost"
