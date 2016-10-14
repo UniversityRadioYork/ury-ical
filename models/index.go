@@ -11,7 +11,6 @@ type IndexModel struct {
 
 // NewIndexModel returns a new IndexModel on the MyRadio session s.
 func NewIndexModel(s *myradio.Session) *IndexModel {
-	// @TODO: Pass in the config options
 	return &IndexModel{Model{session: s}}
 }
 

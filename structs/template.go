@@ -11,5 +11,6 @@ type TimeslotTemplateData struct {
 
 type CalendarTemplateData struct {
 	Show   myradio.ShowMeta
+	User   myradio.Member
 	Config Config
 }

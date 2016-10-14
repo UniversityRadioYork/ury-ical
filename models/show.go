@@ -11,7 +11,6 @@ type ShowModel struct {
 
 // NewShowModel returns a new ShowModel on the MyRadio session s.
 func NewShowModel(s *myradio.Session) *ShowModel {
-	// @TODO: Pass in the config options
 	return &ShowModel{Model{session: s}}
 }
 

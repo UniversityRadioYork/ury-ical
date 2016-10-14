@@ -9,8 +9,11 @@ $ go run main.go
 All shows for the current term
 ##`/show/{id}.ics`
 All episodes for the specified show
+##`/user/{id}.ics`
+All episodes for the specified user
 #TODO
 
 - [X] Add endpoint for all shows
 - [X] Add endpoint for single show
-- [ ] Add endpoint for single person
+- [X] Add endpoint for single person
+- [ ] Add endpoint for single season
