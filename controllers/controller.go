@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"strings"
 	"text/template"
+	"log"
 )
 
 // ControllerInterface is the interface to which controllers adhere.
@@ -106,6 +107,7 @@ func (c *Controller) renderICAL(cal ical.VCalendar, slots []myradio.Timeslot, w 
 		err := t.Execute(&desc, data)
 
 		if err != nil {
+			log.Print(err.Error())
 			http.Error(w, err.Error(), 500)
 			return
 		}

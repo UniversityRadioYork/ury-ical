@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"strings"
 	"text/template"
+	"log"
 )
 
 // IndexController is the controller for the index page.
@@ -30,6 +31,7 @@ func (ic *IndexController) Get(w http.ResponseWriter, r *http.Request) {
 	timeslots, err := im.Get()
 
 	if err != nil {
+		log.Print(err.Error())
 		http.Error(w, err.Error(), 500)
 		return
 	}
@@ -52,6 +54,7 @@ func (ic *IndexController) Get(w http.ResponseWriter, r *http.Request) {
 	err = t.Execute(&desc, data)
 
 	if err != nil {
+		log.Print(err.Error())
 		http.Error(w, err.Error(), 500)
 		return
 	}

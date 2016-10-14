@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"strings"
 	"text/template"
+	"log"
 )
 
 // ShowController is the controller for the index page.
@@ -37,6 +38,7 @@ func (ic *ShowController) Get(w http.ResponseWriter, r *http.Request) {
 	show, timeslots, err := im.Get(id)
 
 	if err != nil {
+		log.Print(err.Error())
 		http.Error(w, err.Error(), 500)
 		return
 	}

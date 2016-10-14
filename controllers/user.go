@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"strings"
 	"text/template"
+	"log"
 )
 
 // UserController is the controller for the index page.
@@ -37,6 +38,7 @@ func (ic *UserController) Get(w http.ResponseWriter, r *http.Request) {
 	user, timeslots, err := im.Get(id)
 
 	if err != nil {
+		log.Print(err.Error())
 		http.Error(w, err.Error(), 500)
 		return
 	}
@@ -63,6 +65,7 @@ func (ic *UserController) Get(w http.ResponseWriter, r *http.Request) {
 	err = t.Execute(&desc, data)
 
 	if err != nil {
+		log.Print(err.Error())
 		http.Error(w, err.Error(), 500)
 		return
 	}
