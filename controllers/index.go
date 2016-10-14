@@ -46,8 +46,7 @@ func (ic *IndexController) Get(w http.ResponseWriter, r *http.Request) {
 	var desc bytes.Buffer
 
 	data := structs.CalendarTemplateData{
-		Config:  *ic.config,
-		HasShow: false,
+		Config: *ic.config,
 	}
 
 	err = t.Execute(&desc, data)
@@ -58,6 +57,7 @@ func (ic *IndexController) Get(w http.ResponseWriter, r *http.Request) {
 	}
 
 	cal.DESCRIPTION = desc.String()
+	cal.X_WR_CALDESC = desc.String()
 
 	ic.renderICAL(cal, timeslots, w)
 

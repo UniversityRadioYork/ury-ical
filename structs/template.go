@@ -10,7 +10,6 @@ type TimeslotTemplateData struct {
 }
 
 type CalendarTemplateData struct {
-	HasShow bool
-	Show    myradio.ShowMeta
-	Config  Config
+	Show   myradio.ShowMeta
+	Config Config
 }

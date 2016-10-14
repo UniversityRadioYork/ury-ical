@@ -7,8 +7,10 @@ $ go run main.go
 ## Endpoints
 ##`/ury.ics`
 All shows for the current term
+##`/show/{id}.ics`
+All episodes for the specified show
 #TODO
 
 - [X] Add endpoint for all shows
-- [ ] Add endpoint for single show
+- [X] Add endpoint for single show
 - [ ] Add endpoint for single person

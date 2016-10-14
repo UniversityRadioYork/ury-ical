@@ -44,6 +44,7 @@ func (ic *ShowController) Get(w http.ResponseWriter, r *http.Request) {
 	cal := ic.config.Calendar
 
 	cal.NAME = fmt.Sprintf("%s - %s", cal.NAME, show.Title)
+	cal.X_WR_CALNAME = cal.NAME
 
 	t := template.New("calendar template")
 	t.Funcs(template.FuncMap{
@@ -55,9 +56,8 @@ func (ic *ShowController) Get(w http.ResponseWriter, r *http.Request) {
 	var desc bytes.Buffer
 
 	data := structs.CalendarTemplateData{
-		Show:    show,
-		HasShow: true,
-		Config:  *ic.config,
+		Show:   show,
+		Config: *ic.config,
 	}
 
 	err = t.Execute(&desc, data)
@@ -68,6 +68,7 @@ func (ic *ShowController) Get(w http.ResponseWriter, r *http.Request) {
 	}
 
 	cal.DESCRIPTION = desc.String()
+	cal.X_WR_CALDESC = cal.DESCRIPTION
 
 	ic.renderICAL(cal, timeslots, w)
 
