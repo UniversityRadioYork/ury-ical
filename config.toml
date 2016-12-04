@@ -31,7 +31,7 @@ timeslotDescription = """Season {{.Timeslot.SeasonNum}}, Episode {{.Timeslot.Tim
 
 Credits: {{.Timeslot.CreditsString}}
 
-{{.Config.Url}}{{.Timeslot.MicroSiteLink.URL}}"""
+{{.Config.Url}}/schedule/shows/timeslots/{{.Timeslot.TimeslotID}}/"""
 
 # This is the config for the server
 [server]

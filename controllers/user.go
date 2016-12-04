@@ -8,6 +8,7 @@ import (
 	"github.com/UniversityRadioYork/ury-ical/structs"
 	"github.com/gorilla/mux"
 	"github.com/jaytaylor/html2text"
+	"log"
 	"net/http"
 	"strconv"
 	"strings"
@@ -40,6 +41,8 @@ func (ic *UserController) Get(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 500)
 		return
 	}
+
+	log.Printf("Found %d timeslots for user %d", len(timeslots), id)
 
 	cal := ic.config.Calendar
 
