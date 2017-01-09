@@ -14,21 +14,18 @@ import (
 //
 // Returns a config struct and nil if the config read was successful,
 // and an undefined value and non-nil otherwise.
-func GetConfigFromFile(path string) (*structs.Config, error) {
-
-	c := structs.Config{}
-	cr := &c
-
+func GetConfigFromFile(path string) (c structs.Config, err error) {
 	absPath, _ := filepath.Abs(path)
 
 	b, err := ioutil.ReadFile(absPath)
 
 	if err != nil {
-		return cr, err
+		return
 	}
 
 	s := string(b)
 
-	_, err = toml.Decode(s, cr)
-	return cr, err
+	_, err = toml.Decode(s, &c)
+
+	return
 }
