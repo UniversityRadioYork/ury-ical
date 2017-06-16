@@ -10,13 +10,13 @@ $ go run main.go
 
 ## Endpoints
 
-##`/ury.ics`
+## `/ury.ics`
 All shows for the current term
 
-##`/show/{id}.ics`
+## `/show/{id}.ics`
 All episodes for the specified show
 
-##`/user/{id}.ics`
+## `/user/{id}.ics`
 All episodes for the specified user
 
 #TODO
