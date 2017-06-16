@@ -29,11 +29,11 @@ func (m *UserModel) Get(id int) (user myradio.User, timeslots []myradio.Timeslot
 }
 
 func (m *UserModel) getTimeslotsForUser(user myradio.User) (timeslots []myradio.Timeslot, err error) {
-	shows, err := m.session.GetUserShowCredits(user.Memberid)
+	shows, err := m.session.GetUserShowCredits(user.MemberID)
 	if err != nil {
 		return
 	}
-	log.Printf("Found %d shows for user %d", len(shows), user.Memberid)
+	log.Printf("Found %d shows for user %d", len(shows), user.MemberID)
 	for _, show := range shows {
 		ts, err := m.getTimeslotsForShow(show)
 		if err != nil {
