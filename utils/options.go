@@ -1,10 +1,11 @@
 package utils
 
 import (
+	"os"
+	"path/filepath"
+
 	"github.com/BurntSushi/toml"
 	"github.com/UniversityRadioYork/ury-ical/structs"
-	"io/ioutil"
-	"path/filepath"
 )
 
 // GetConfigFromFile reads the website config from the given path.
@@ -17,7 +18,7 @@ import (
 func GetConfigFromFile(path string) (c structs.Config, err error) {
 	absPath, _ := filepath.Abs(path)
 
-	b, err := ioutil.ReadFile(absPath)
+	b, err := os.ReadFile(absPath)
 
 	if err != nil {
 		return

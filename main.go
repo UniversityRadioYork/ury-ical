@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"os"
+
+	"github.com/UniversityRadioYork/ury-ical/structs"
 	"github.com/UniversityRadioYork/ury-ical/utils"
 	"github.com/UniversityRadioYork/ury-ical/web"
 	"github.com/urfave/cli"
-	"log"
-	"os"
-	"github.com/UniversityRadioYork/ury-ical/structs"
 )
 
 func main() {
@@ -20,7 +21,7 @@ func main() {
 	app.HideVersion = true
 	app.Usage = "Allows subscription to the URY schedule using ICAL."
 	app.Authors = []cli.Author{
-		cli.Author{
+		{
 			Name:  "Chris Taylor",
 			Email: "christhebaron@gmail.com",
 		},
@@ -36,7 +37,7 @@ func main() {
 
 	// Before the application runs, let's just do some validation
 	app.Before = func(c *cli.Context) error {
-		if "" == configfilepath {
+		if configfilepath == "" {
 			return cli.NewExitError("Config file is required", 1)
 		}
 		var err error
