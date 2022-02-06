@@ -14,3 +14,7 @@ type CalendarTemplateData struct {
 	User   myradio.User
 	Config Config
 }
+
+type EventDescription struct {
+	Description string
+}

@@ -1,12 +1,13 @@
 package web
 
 import (
+	"net/http"
+
 	"github.com/UniversityRadioYork/myradio-go"
 	"github.com/UniversityRadioYork/ury-ical/controllers"
 	"github.com/UniversityRadioYork/ury-ical/structs"
 	"github.com/codegangsta/negroni"
 	"github.com/gorilla/mux"
-	"net/http"
 )
 
 type Server struct {
@@ -32,6 +33,9 @@ func NewServer(c *structs.Config) (*Server, error) {
 
 	ic := controllers.NewIndexController(session, c)
 	getRouter.HandleFunc("/ury.ics", ic.Get)
+
+	mc := controllers.NewMembersController(session, c)
+	getRouter.HandleFunc("/members.ics", mc.Get)
 
 	sc := controllers.NewShowController(session, c)
 	getRouter.HandleFunc("/show/{id:[0-9]+}.ics", sc.Get)

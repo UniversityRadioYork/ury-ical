@@ -2,6 +2,7 @@ package models
 
 import (
 	"github.com/UniversityRadioYork/myradio-go"
+	"github.com/UniversityRadioYork/ury-ical/structs"
 )
 
 // ModelInterface is the interface to which models adhere.
@@ -15,4 +16,5 @@ type ModelInterface interface {
 // controller.
 type Model struct {
 	session *myradio.Session
+	config  *structs.Config
 }

@@ -3,15 +3,16 @@ package controllers
 import (
 	"bytes"
 	"fmt"
+	"net/http"
+	"strconv"
+	"strings"
+	"text/template"
+
 	"github.com/UniversityRadioYork/myradio-go"
 	"github.com/UniversityRadioYork/ury-ical/models"
 	"github.com/UniversityRadioYork/ury-ical/structs"
 	"github.com/gorilla/mux"
 	"github.com/jaytaylor/html2text"
-	"net/http"
-	"strconv"
-	"strings"
-	"text/template"
 )
 
 // ShowController is the controller for the index page.
@@ -28,7 +29,7 @@ func NewShowController(s *myradio.Session, c *structs.Config) *ShowController {
 // Get handles the HTTP GET request r for the index page, writing to w.
 func (ic *ShowController) Get(w http.ResponseWriter, r *http.Request) {
 
-	im := models.NewShowModel(ic.session)
+	im := models.NewShowModel(ic.session, ic.config)
 
 	vars := mux.Vars(r)
 

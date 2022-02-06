@@ -3,16 +3,17 @@ package controllers
 import (
 	"bytes"
 	"fmt"
-	"github.com/UniversityRadioYork/myradio-go"
-	"github.com/UniversityRadioYork/ury-ical/models"
-	"github.com/UniversityRadioYork/ury-ical/structs"
-	"github.com/gorilla/mux"
-	"github.com/jaytaylor/html2text"
 	"log"
 	"net/http"
 	"strconv"
 	"strings"
 	"text/template"
+
+	"github.com/UniversityRadioYork/myradio-go"
+	"github.com/UniversityRadioYork/ury-ical/models"
+	"github.com/UniversityRadioYork/ury-ical/structs"
+	"github.com/gorilla/mux"
+	"github.com/jaytaylor/html2text"
 )
 
 // UserController is the controller for the index page.
@@ -29,7 +30,7 @@ func NewUserController(s *myradio.Session, c *structs.Config) *UserController {
 // Get handles the HTTP GET request r for the index page, writing to w.
 func (ic *UserController) Get(w http.ResponseWriter, r *http.Request) {
 
-	im := models.NewUserModel(ic.session)
+	im := models.NewUserModel(ic.session, ic.config)
 
 	vars := mux.Vars(r)
 

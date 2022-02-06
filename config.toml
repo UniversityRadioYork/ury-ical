@@ -33,6 +33,8 @@ Credits: {{.Timeslot.CreditsString}}
 
 {{.Config.Url}}/schedule/shows/timeslots/{{.Timeslot.TimeslotID}}/"""
 
+eventDescription = "{{ trim (html2text .Description) }}"
+
 # This is the config for the server
 [server]
 	address	= "localhost"

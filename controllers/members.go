@@ -12,42 +12,37 @@ import (
 	"github.com/jaytaylor/html2text"
 )
 
-// IndexController is the controller for the index page.
-type IndexController struct {
+type MembersController struct {
 	Controller
 }
 
-// NewIndexController returns a new IndexController with the MyRadio session s
-// and configuration context c.
-func NewIndexController(s *myradio.Session, c *structs.Config) *IndexController {
-	return &IndexController{Controller{session: s, config: c}}
+func NewMembersController(s *myradio.Session, c *structs.Config) *MembersController {
+	return &MembersController{Controller{session: s, config: c}}
 }
 
-// Get handles the HTTP GET request r for the index page, writing to w.
-func (ic *IndexController) Get(w http.ResponseWriter, r *http.Request) {
+func (mc *MembersController) Get(w http.ResponseWriter, r *http.Request) {
+	mm := models.NewMembersModel(mc.session, mc.config)
 
-	im := models.NewIndexModel(ic.session, ic.config)
-
-	timeslots, err := im.Get()
+	events, err := mm.Get()
 
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
 	}
 
-	cal := ic.config.Calendar
+	cal := mc.config.Calendar
 
 	t := template.New("calendar template")
 	t.Funcs(template.FuncMap{
 		"html2text": html2text.FromString,
 		"trim":      strings.TrimSpace,
 	})
-	t, _ = t.Parse(ic.config.CalendarDescription)
+	t, _ = t.Parse(mc.config.CalendarDescription)
 
 	var desc bytes.Buffer
 
 	data := structs.CalendarTemplateData{
-		Config: *ic.config,
+		Config: *mc.config,
 	}
 
 	err = t.Execute(&desc, data)
@@ -60,6 +55,6 @@ func (ic *IndexController) Get(w http.ResponseWriter, r *http.Request) {
 	cal.DESCRIPTION = desc.String()
 	cal.X_WR_CALDESC = desc.String()
 
-	ic.renderICAL(cal, timeslots, w)
+	mc.renderICAL(cal, events, w)
 
 }

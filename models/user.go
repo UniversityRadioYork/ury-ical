@@ -1,8 +1,10 @@
 package models
 
 import (
-	"github.com/UniversityRadioYork/myradio-go"
 	"log"
+
+	"github.com/UniversityRadioYork/myradio-go"
+	"github.com/UniversityRadioYork/ury-ical/structs"
 )
 
 // UserModel is the model for the User controller.
@@ -11,20 +13,27 @@ type UserModel struct {
 }
 
 // NewUserModel returns a new UserModel on the MyRadio session s.
-func NewUserModel(s *myradio.Session) *UserModel {
-	return &UserModel{Model{session: s}}
+func NewUserModel(s *myradio.Session, c *structs.Config) *UserModel {
+	return &UserModel{Model{session: s, config: c}}
 }
 
 // Get gets the data required for the User controller from MyRadio.
 //
 // Otherwise, it returns undefined data and the error causing failure.
-func (m *UserModel) Get(id int) (user myradio.User, timeslots []myradio.Timeslot, err error) {
+func (m *UserModel) Get(id int) (user myradio.User, events []CalendarEvent, err error) {
 	u, err := m.session.GetUser(id)
 	if err != nil {
 		return
 	}
 	user = *u
-	timeslots, err = m.getTimeslotsForUser(user)
+	timeslots, err := m.getTimeslotsForUser(user)
+
+	if err != nil {
+		return
+	}
+
+	events, err = timeslotsToCalendarEvents(timeslots, m.config)
+
 	return
 }
 
